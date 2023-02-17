@@ -3,7 +3,7 @@ export enum USER_ROLES {
     ADMIN = "ADMIN"
 }
 
-export interface UsersDB {
+export interface UserDB {
     id: string,
     name: string,
     email: string,
@@ -11,8 +11,8 @@ export interface UsersDB {
     role: USER_ROLES,
     created_at: string
 }
- 
-export interface UsersModel {
+
+export interface UserModel {
     id: string,
     name: string,
     email: string,
@@ -21,7 +21,7 @@ export interface UsersModel {
     createdAt: string
 }
 
-export interface PostsDB{
+export interface PostDB {
     id: string,
     creator_id: string,
     content: string,
@@ -30,21 +30,32 @@ export interface PostsDB{
     created_at: string,
     updated_at: string
 }
-export interface Creator{
+
+export interface PostWithCreatorDB extends PostDB {
+    creator_name: string
+}
+export interface Creator {
     id: string,
     name: string
 }
-export interface PostsModel{
+export interface PostModel {
     id: string,
     content: string,
     likes: number,
     dislikes: number,
     createdAt: string,
     updatedAt: string,
-    creator: Creator
+    creator: {
+        id: string,
+        name: string
+    }
 }
 
-
+export interface TokenPayload {
+    id: string,
+    name: string,
+    role: USER_ROLES
+}
 
 export const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,12}$/g
 export const regexEmail = /\S+@\S+\.\S+/
