@@ -57,5 +57,11 @@ export interface TokenPayload {
     role: USER_ROLES
 }
 
+export interface likeDislikeDB {
+    user_id: string,
+    post_id: string,
+    like: number
+}
+
 export const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,12}$/g
 export const regexEmail = /\S+@\S+\.\S+/
