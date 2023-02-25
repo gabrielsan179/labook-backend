@@ -1,6 +1,6 @@
 import { UserDB, UserModel, USER_ROLES } from "../types"
 
-export class User {    
+export class User {
     constructor(
         private id: string,
         private name: string,
@@ -8,12 +8,12 @@ export class User {
         private password: string,
         private role: USER_ROLES,
         private createdAt: string
-    ) {}
+    ) { }
 
     public getId(): string {
         return this.id
     }
-    
+
     public setId(value: string): void {
         this.id = value
     }

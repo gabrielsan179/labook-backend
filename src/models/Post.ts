@@ -10,12 +10,12 @@ export class Post {
         private updatedAt: string,
         private creatorId: string,
         private creatorName: string
-    ){}
+    ) { }
 
     public getId(): string {
         return this.id
     }
-    
+
     public setId(value: string): void {
         this.id = value
     }
@@ -23,7 +23,7 @@ export class Post {
     public getContent(): string {
         return this.content
     }
-    
+
     public setContent(value: string): void {
         this.content = value
     }
@@ -36,6 +36,14 @@ export class Post {
         this.likes = value
     }
 
+    public addLikes(): void {
+        this.likes += 1
+    }
+
+    public removeLikes(): void {
+        this.likes -= 1
+    }
+
     public getDislikes(): number {
         return this.dislikes
     }
@@ -44,10 +52,18 @@ export class Post {
         this.dislikes = value
     }
 
+    public addDislikes(): void {
+        this.dislikes += 1
+    }
+
+    public removeDislikes(): void {
+        this.dislikes -= 1
+    }
+
     public getCreatedAt(): string {
         return this.createdAt
     }
-    
+
     public setCreatedAt(value: string): void {
         this.createdAt = value
     }
@@ -55,7 +71,7 @@ export class Post {
     public getUpdatedAt(): string {
         return this.updatedAt
     }
-    
+
     public setUpdatedAt(value: string): void {
         this.updatedAt = value
     }
@@ -63,7 +79,7 @@ export class Post {
     public getCreatorId(): string {
         return this.creatorId
     }
-    
+
     public setCreatorId(value: string): void {
         this.creatorId = value
     }
@@ -71,13 +87,13 @@ export class Post {
     public getCreatorName(): string {
         return this.creatorName
     }
-    
+
     public setCreatorName(value: string): void {
         this.creatorName = value
     }
-    
+
     public toDBModel(): PostDB {
-        return{
+        return {
             id: this.id,
             creator_id: this.creatorId,
             content: this.content,

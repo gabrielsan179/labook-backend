@@ -15,26 +15,26 @@ export class UserBusiness {
         private idGenerator: IdGenerator,
         private tokenManager: TokenManager,
         private hashManager: HashManager
-    ) {}
+    ) { }
 
     public getUsers = async (input: GetUsersInput): Promise<GetUsersOutput> => {
         const { q, token } = input
 
-        if(!token){
+        if (!token) {
             throw new BadRequestError("Token não enviado");
         }
 
         const payload = this.tokenManager.getPayload(token as string)
-       
-        if(payload === null){
+
+        if (payload === null) {
             throw new BadRequestError("Token inválido");
         }
 
-        if (payload.role !== USER_ROLES.ADMIN){
+        if (payload.role !== USER_ROLES.ADMIN) {
             throw new ForbiddenError()
         }
 
-        console.table ({payload})
+        console.table({ payload })
 
 
         if (typeof q !== "string" && q !== undefined) {
@@ -102,7 +102,7 @@ export class UserBusiness {
         }
 
         const hashedPassword = await this.hashManager.hash(password)
-       
+
         const id = this.idGenerator.generate()
 
         const userId = await this.userDatabase.findUserById(id)
@@ -123,7 +123,7 @@ export class UserBusiness {
         const newUserDB = newUser.toDBModel()
 
         await this.userDatabase.insertUser(newUserDB)
-        
+
         const tokenPayload: TokenPayload = {
             id: newUser.getId(),
             name: newUser.getName(),
@@ -163,13 +163,13 @@ export class UserBusiness {
         if (!userDB) {
             throw new NotFoundError("'email' não encontrado")
         }
-       
-             const isPasswordCorrect = await this.hashManager.compare(password,userDB.password)
-        
-        if (!isPasswordCorrect){
-                throw new BadRequestError("'password' incorreto");
-         }
-        
+
+        const isPasswordCorrect = await this.hashManager.compare(password, userDB.password)
+
+        if (!isPasswordCorrect) {
+            throw new BadRequestError("'password' incorreto");
+        }
+
         const user = new User(
             userDB.id,
             userDB.name,
